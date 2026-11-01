@@ -83,7 +83,7 @@ class Index:
         for d in docs:
             dept = str(d.get('department', '')).upper()
             if 'INFOR' in dept:
-                konsentrasi, kw_terdeteksi = klasifikasi(d['title'])
+                konsentrasi, kw_terdeteksi = klasifikasi(d['title'], d['abstract'])
                 d['konsentrasi'] = konsentrasi
                 d['keyword_terdeteksi'] = kw_terdeteksi
             else:
