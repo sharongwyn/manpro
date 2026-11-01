@@ -1,0 +1,7 @@
+{
+  "title": "Aplikasi pembelajaran aksara Sunda dengan pengenalan karakter",
+  "description": "Media interaktif untuk membantu generasi muda belajar aksara Sunda dari gambar tulisan tangan.",
+  "problem": "",
+  "method": "EfficientNetV2B0 dan YOLOv8",
+  "dataset": "Gambar aksara Sunda dari dataset publik dan responden"
+}

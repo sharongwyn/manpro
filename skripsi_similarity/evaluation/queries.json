@@ -1,0 +1,467 @@
+[
+  {
+    "id": "A01",
+    "legacy_group": "A",
+    "title": "Aplikasi Web Belajar Aksara Sunda dengan Pengenalan Karakter Berbasis EfficientNetV2B0",
+    "description": "",
+    "problem": "Aksara Sunda terancam hilang karena generasi muda jarang memakainya dan belum ada media belajar yang interaktif.",
+    "method": "Klasifikasi karakter dengan EfficientNetV2B0, deteksi dan segmentasi gambar dengan YOLOv8, serta augmentasi data.",
+    "dataset": "Gambar aksara Sunda (ngalagena, swara, rarangken) dari dataset publik di internet dan tulisan tangan responden.",
+    "source_ids": [
+      "thesis-f98a71d8e4443d9c762d"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase DSA 2025 (aksara Sunda, EfficientNetV2B0)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A02",
+    "legacy_group": "A",
+    "title": "Peningkatan Akurasi Pengenalan Emosi dari Suara dengan Menggabungkan Teks dan Audio Memakai wav2vec dan SpecAugment",
+    "description": "",
+    "problem": "Pengenalan emosi suara yang hanya memakai satu modalitas kurang akurat dalam membedakan marah, sedih, senang, dan netral.",
+    "method": "Model multimodal yang menggabungkan teks hasil speech to text dengan sinyal suara, memakai wav2vec dan augmentasi SpecAugment.",
+    "dataset": "Rekaman suara berformat wav dari RAVDESS dan IEMOCAP beserta transkripnya.",
+    "source_ids": [
+      "thesis-206dcdb1d96b374eacb3"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase DSA 2025 (speech emotion recognition)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A03",
+    "legacy_group": "A",
+    "title": "Faktor yang Memengaruhi Indeks Pembangunan Manusia di Kabupaten dan Kota Jawa Timur dengan Regresi Data Panel dan Random Forest",
+    "description": "",
+    "problem": "IPM Jawa Timur terus naik tetapi kesenjangan antarwilayah masih lebar, sehingga perlu diketahui faktor penentunya di tiap daerah.",
+    "method": "Regresi data panel, random forest untuk tingkat kepentingan faktor, dan K-Means untuk mengelompokkan wilayah.",
+    "dataset": "Data sekunder BPS untuk 38 kabupaten dan kota di Jawa Timur periode 2017 sampai 2024.",
+    "source_ids": [
+      "thesis-d542668b2773d239faa4"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase DSA 2026 (IPM Jawa Timur)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A04",
+    "legacy_group": "A",
+    "title": "Penentuan Lokasi Terbaik Pembangkit Listrik Tenaga Bayu di Nusa Tenggara Timur dengan Analisis Spasio-Temporal dan Random Forest",
+    "description": "",
+    "problem": "Potensi angin di NTT besar, tetapi memilih lokasi pembangkit listrik tenaga angin yang optimal sulit karena karakter angin berubah menurut ruang dan waktu.",
+    "method": "Klasifikasi kelayakan lokasi dengan random forest memakai fitur kecepatan, arah, dan variabilitas angin.",
+    "dataset": "Data angin historis NASA POWER tahun 2016 sampai 2025 pada 27 lokasi, termasuk lokasi PLTB yang sudah beroperasi sebagai acuan.",
+    "source_ids": [
+      "thesis-fb11d57dd95b3dda1f80"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase DSA 2026 (lokasi optimal PLTB NTT)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A05",
+    "legacy_group": "A",
+    "title": "Pembacaan Gerak Bibir Bahasa Indonesia Berdasarkan Visem dengan VGG16, Jaro-Winkler, dan Bigram",
+    "description": "",
+    "problem": "Mengenali kata hanya dari gerakan bibir berguna bagi penyandang gangguan pendengaran, tetapi belum banyak model untuk bahasa Indonesia.",
+    "method": "Klasifikasi visem dengan VGG16 yang dibandingkan dengan STCNN, lalu koreksi kata memakai kemiripan Jaro-Winkler dan bigram.",
+    "dataset": "Video buatan sendiri berisi 25 kalimat bahasa Indonesia (50 kata) yang diucapkan 12 orang, total 300 video.",
+    "source_ids": [
+      "thesis-52b119e9b12d6bb86e21"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase INFOR 2022 (lip reading visem)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A06",
+    "legacy_group": "A",
+    "title": "Kendali Presentasi dan Pemutar Media dengan Gerakan Tangan Memakai Mediapipe untuk Konferensi Hibrida",
+    "description": "",
+    "problem": "Pada rapat atau kuliah hibrida, presenter sulit mengoperasikan slide dan pemutar media tanpa menyentuh komputer.",
+    "method": "Pengenalan gerakan tangan dinamis dengan CNN 3D (RT3D) dan Mediapipe Hands, lalu gerakan dipetakan ke perintah aplikasi.",
+    "dataset": "Jester dataset dari TwentyBN (video gestur tangan, 27 kelas, 12 dipakai) dan video langsung dari kamera.",
+    "source_ids": [
+      "thesis-f1209eb38081e96a4f16"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase INFOR 2022 (hand gesture Mediapipe)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A07",
+    "legacy_group": "A",
+    "title": "Aplikasi Web Penerbitan Sertifikat dengan Pemeriksaan Keaslian Memakai SHA-256 dan RSA",
+    "description": "",
+    "problem": "Penerbitan sertifikat memerlukan banyak proses, dan keaslian sertifikat digital sulit dipastikan.",
+    "method": "Tanda tangan digital dengan hash SHA-256 dan RSA, diimplementasikan di PHP memakai pustaka phpseclib.",
+    "dataset": "Data sertifikat yang dibuat di aplikasi beserta tanda tangan digitalnya.",
+    "source_ids": [
+      "thesis-625c4cb3e85b14bb6dad"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase INFOR 2023 (sertifikat SHA-256 RSA)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A08",
+    "legacy_group": "A",
+    "title": "Gudang Data Berbasis Graph Database untuk Menganalisis Pelaksanaan Kurikulum OBE Program Studi Informatika",
+    "description": "",
+    "problem": "Prodi perlu menilai apakah kurikulum berbasis outcome berjalan baik, tetapi data CPL, CPMK, dan nilai tersebar sehingga sulit dianalisis.",
+    "method": "Data warehouse dengan graph database Neo4j dan analisis distribusi nilai CPL.",
+    "dataset": "Data akademik prodi (mahasiswa, CPL, CPMK, kelas, mata kuliah, nilai) semester gasal 2020 sampai genap 2022.",
+    "source_ids": [
+      "thesis-b93e2a718152726ed7ff"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase SIB 2024 (data warehouse graph database)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A09",
+    "legacy_group": "A",
+    "title": "Optimasi Rute Pengantaran pada Jasa Kurir dengan Clarke and Wright Saving dan Cheapest Insertion",
+    "description": "",
+    "problem": "Jasa pengiriman di Surabaya membagi alamat antar driver secara tidak seimbang sehingga jarak tempuh tidak minimum.",
+    "method": "Clarke and Wright Saving Heuristic dan Cheapest Insertion Heuristic, rute divisualisasikan dengan Google Maps API.",
+    "dataset": "Data alamat pengiriman dan kapasitas barang harian dari perusahaan jasa pengiriman di Surabaya.",
+    "source_ids": [
+      "thesis-5e6e092a949df74bac52"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase SIB 2023 (rute Clarke and Wright)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "A10",
+    "legacy_group": "A",
+    "title": "Aplikasi Pendamping Konsultasi Diet Online untuk Memantau Member dan Menghitung Kebutuhan Gizi",
+    "description": "",
+    "problem": "Coach diet kesulitan memantau banyak member aktif satu per satu pada bisnis konsultasi diet online.",
+    "method": "Sistem informasi dengan perhitungan kebutuhan kalori dan komposisi gizi dari profil tubuh member.",
+    "dataset": "Tabel Komposisi Pangan Indonesia (TKPI) dan profil member (usia, tinggi, berat, lingkar tubuh).",
+    "source_ids": [
+      "thesis-bfc3204b0866c3b27daf"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Parafrase SIB 2023 (konsultasi diet JP Smart Fitness)",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B01",
+    "legacy_group": "B",
+    "title": "Prediksi Hasil Panen Jagung Berdasarkan Curah Hujan dan Indeks Vegetasi Satelit",
+    "description": "",
+    "problem": "Petani dan dinas pertanian sulit memperkirakan hasil panen per musim karena cuaca berubah-ubah.",
+    "method": "Gradient boosting (LightGBM) dengan fitur curah hujan dan NDVI.",
+    "dataset": "Citra Sentinel-2 untuk NDVI dan data curah hujan CHIRPS di Jawa Timur.",
+    "source_ids": [
+      "thesis-9dbdae614b7c0992e707"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi DSA 2026 (produktivitas pertanian dari tanah dan cuaca). Problem sama, dataset dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B02",
+    "legacy_group": "B",
+    "title": "Estimasi Kepadatan Area Parkir Mal dari Kamera CCTV dengan YOLOv8",
+    "description": "",
+    "problem": "Pengunjung sulit mengetahui ketersediaan parkir sehingga terjadi antrean kendaraan di pintu masuk.",
+    "method": "Deteksi kendaraan dengan YOLOv8 lalu penentuan tingkat kepadatan dengan ambang batas.",
+    "dataset": "Rekaman CCTV area parkir sebuah mal di Surabaya.",
+    "source_ids": [
+      "thesis-e83f64091b0835c0068b"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi DSA 2025 (kemacetan dari CCTV, YOLOv11). Objek dan dataset beda, metode serumpun",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B03",
+    "legacy_group": "B",
+    "title": "Deteksi Indikasi Depresi pada Unggahan Reddit Berbahasa Inggris dengan DistilBERT",
+    "description": "",
+    "problem": "Isu kesehatan mental di media sosial meningkat dan sulit dipantau secara manual.",
+    "method": "Klasifikasi teks dengan fine-tuning DistilBERT.",
+    "dataset": "Unggahan subreddit depresi dan percakapan umum dari Kaggle.",
+    "source_ids": [
+      "thesis-1d5f3eb6ceca2e19fd31",
+      "thesis-93116c615229fea70c33",
+      "thesis-e30ec49d1ce92c15b762"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi DSA 2026 (x2) dan SIB 2024 (deteksi keinginan bunuh diri dari teks). Kondisi mental beda, dataset dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B04",
+    "legacy_group": "B",
+    "title": "Pengenalan Akor Gitar Otomatis dari Rekaman Audio dengan CNN",
+    "description": "",
+    "problem": "Pemula yang belajar gitar butuh petunjuk akor sebuah lagu tetapi sulit menentukannya hanya dengan telinga.",
+    "method": "CNN pada spektrogram chroma untuk klasifikasi akor.",
+    "dataset": "Rekaman lagu pop Indonesia berlabel akor yang dikumpulkan sendiri.",
+    "source_ids": [
+      "thesis-659856fc340c94782730"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi INFOR 2023 (transkripsi musik polifonik). Tujuan, dataset, dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B05",
+    "legacy_group": "B",
+    "title": "Prediksi Jumlah Donor Darah Bulanan di PMI Kota Malang dengan Prophet",
+    "description": "",
+    "problem": "Persediaan kantong darah sering tidak seimbang dengan permintaan rumah sakit sehingga perlu diprediksi.",
+    "method": "Peramalan deret waktu dengan Facebook Prophet.",
+    "dataset": "Data donor dan permintaan darah PMI Kota Malang periode 2019 sampai 2024.",
+    "source_ids": [
+      "thesis-48f774a3e8fe4aeb11db",
+      "thesis-7b8a4c3063148702f431",
+      "thesis-c0d0671a801b11f72e09"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi SIB 2022 (prediksi kebutuhan darah ARIMA) dan dua skripsi PMI lain. Lokasi dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B06",
+    "legacy_group": "B",
+    "title": "Penentuan Lokasi Penyimpanan Barang Gudang Toko Online dengan Algoritma Genetika",
+    "description": "",
+    "problem": "Penempatan barang yang tidak teratur membuat pengambilan pesanan di gudang memakan waktu lama.",
+    "method": "Algoritma genetika untuk penempatan lokasi barang (slotting).",
+    "dataset": "Data pesanan dan tata letak gudang sebuah toko online.",
+    "source_ids": [
+      "thesis-762622c95e357cc38c49"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi SIB 2022 (rute order picking, simulated annealing). Objek dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B07",
+    "legacy_group": "B",
+    "title": "Sistem Penilaian Otomatis Tugas Pemrograman Python pada Mata Kuliah Algoritma",
+    "description": "",
+    "problem": "Dosen menghabiskan waktu lama memeriksa tugas pemrograman mahasiswa satu per satu.",
+    "method": "Pengujian otomatis dengan unit test dan autograder berbasis Docker.",
+    "dataset": "Kumpulan jawaban tugas pemrograman mahasiswa mata kuliah algoritma dan pemrograman.",
+    "source_ids": [
+      "thesis-59c10cb97c54e1e0c139"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi DSA 2026 (penilaian otomatis praktikum). Mata kuliah dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B08",
+    "legacy_group": "B",
+    "title": "Chatbot Layanan Informasi Administrasi Akademik Berbasis Retrieval-Augmented Generation",
+    "description": "",
+    "problem": "Mahasiswa sering menanyakan hal yang sama kepada bagian administrasi sehingga staf kewalahan.",
+    "method": "RAG dengan embedding SBERT dan model bahasa besar untuk menjawab pertanyaan.",
+    "dataset": "Dokumen peraturan akademik dan FAQ universitas.",
+    "source_ids": [
+      "thesis-16cc87d29a2eaef55fa0",
+      "thesis-efd85f15484b9ed89b6c"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi INFOR 2023 (chatbot tanya jawab mahasiswa pra skripsi, dan chatbot intent). Topik dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B09",
+    "legacy_group": "B",
+    "title": "Aplikasi Mobile Belajar Bahasa Inggris untuk Siswa SMP dengan Gamifikasi",
+    "description": "",
+    "problem": "Siswa SMP cepat bosan belajar kosakata bahasa Inggris dengan cara konvensional.",
+    "method": "Game-based learning dengan poin dan level, dibangun dengan Flutter.",
+    "dataset": "Bank soal kosakata dan tata bahasa dari buku pelajaran SMP.",
+    "source_ids": [
+      "thesis-e081bd519f78416483e5"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi DSA 2024 (aplikasi mobile game-based learning). Jenjang dan konten beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "B10",
+    "legacy_group": "B",
+    "title": "Penilaian Esai Otomatis Bahasa Indonesia untuk Ujian Mahasiswa dengan IndoBERT",
+    "description": "",
+    "problem": "Menilai esai secara manual memakan waktu dan hasilnya bisa tidak konsisten antar penilai.",
+    "method": "Regresi skor esai dengan fine-tuning IndoBERT.",
+    "dataset": "Kumpulan esai jawaban ujian mahasiswa berbahasa Indonesia beserta nilai dari dosen.",
+    "source_ids": [
+      "thesis-d3e588f2b43afe36556b"
+    ],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Inspirasi INFOR 2023 (penilaian esai otomatis, GRU). Bahasa, dataset, dan metode beda",
+    "relevance_status": "legacy_source_provisional",
+    "mapping_status": "resolved"
+  },
+  {
+    "id": "C01",
+    "legacy_group": "C",
+    "title": "Deteksi Retakan Jalan Aspal dari Citra Drone dengan Mask R-CNN",
+    "description": "",
+    "problem": "Survei kerusakan jalan secara manual lambat dan berbahaya bagi petugas dinas pekerjaan umum.",
+    "method": "Segmentasi instance dengan Mask R-CNN.",
+    "dataset": "Foto udara jalan kota dari drone dengan label piksel retakan.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C02",
+    "legacy_group": "C",
+    "title": "Klasifikasi Penyakit Daun Tomat dengan MobileNetV3 pada Aplikasi Mobile",
+    "description": "",
+    "problem": "Petani tomat sulit membedakan jenis penyakit daun di lapangan sehingga terlambat menangani.",
+    "method": "Transfer learning MobileNetV3 dengan TensorFlow Lite.",
+    "dataset": "Foto daun tomat sehat dan berpenyakit dari PlantVillage.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal (metode umum)",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C03",
+    "legacy_group": "C",
+    "title": "Penjadwalan Shift Perawat Rumah Sakit dengan Algoritma Genetika",
+    "description": "",
+    "problem": "Penyusunan jadwal shift perawat secara manual sering bentrok dan terasa tidak adil.",
+    "method": "Algoritma genetika dengan batasan beban kerja.",
+    "dataset": "Data ketersediaan dan beban kerja perawat di sebuah rumah sakit tipe C.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C04",
+    "legacy_group": "C",
+    "title": "Deteksi Transaksi Kartu Kredit Mencurigakan dengan Autoencoder",
+    "description": "",
+    "problem": "Bank terlambat mengetahui transaksi kartu kredit yang mencurigakan sehingga nasabah dirugikan.",
+    "method": "Deteksi anomali dengan autoencoder.",
+    "dataset": "Data transaksi kartu kredit anonim dari Kaggle.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C05",
+    "legacy_group": "C",
+    "title": "Prediksi Konsentrasi PM2.5 Harian di Surabaya dengan Random Forest",
+    "description": "",
+    "problem": "Kualitas udara kota memburuk dan warga tidak mendapat peringatan dini.",
+    "method": "Random forest regression.",
+    "dataset": "Data sensor kualitas udara dan data cuaca BMKG Surabaya.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal (metode umum)",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C06",
+    "legacy_group": "C",
+    "title": "Prediksi Tinggi Gelombang Laut di Selat Madura dengan LSTM",
+    "description": "",
+    "problem": "Nelayan kecil sulit mendapat prakiraan gelombang yang akurat di perairan lokal.",
+    "method": "LSTM untuk peramalan deret waktu.",
+    "dataset": "Data tinggi gelombang dari satelit altimetri dan angin permukaan ERA5.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal (metode umum)",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C07",
+    "legacy_group": "C",
+    "title": "Aplikasi Augmented Reality Penunjuk Jalur Evakuasi Gempa di Gedung Kampus",
+    "description": "",
+    "problem": "Penghuni gedung kebingungan mencari jalur evakuasi saat terjadi gempa.",
+    "method": "Augmented reality dengan ARCore dan Unity.",
+    "dataset": "Denah gedung dan titik kumpul kampus.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C08",
+    "legacy_group": "C",
+    "title": "Analisis Kepuasan Wisatawan terhadap Destinasi Wisata Bromo dengan Importance-Performance Analysis",
+    "description": "",
+    "problem": "Pengelola wisata belum tahu aspek layanan mana yang paling perlu diperbaiki.",
+    "method": "Importance-Performance Analysis.",
+    "dataset": "Kuesioner kepada 250 wisatawan yang berkunjung ke Bromo.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C09",
+    "legacy_group": "C",
+    "title": "Deteksi Dini Titik Kebakaran Hutan dari Citra Satelit dengan U-Net",
+    "description": "",
+    "problem": "Kebakaran hutan sering terlambat diketahui karena areanya luas dan sulit dijangkau.",
+    "method": "Segmentasi dengan arsitektur U-Net.",
+    "dataset": "Citra Sentinel-2 dan data titik panas NASA FIRMS di Kalimantan.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal (metode umum)",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  },
+  {
+    "id": "C10",
+    "legacy_group": "C",
+    "title": "Prediksi Lama Rawat Inap Pasien Demam Berdarah Dengue dengan Gradient Boosting",
+    "description": "",
+    "problem": "Rumah sakit sulit merencanakan ketersediaan tempat tidur karena lama rawat pasien DBD bervariasi.",
+    "method": "Gradient boosting regression.",
+    "dataset": "Data rekam medis pasien DBD sebuah rumah sakit tahun 2021 sampai 2024.",
+    "source_ids": [],
+    "label_status": "legacy_provisional",
+    "legacy_notes": "Orisinal (metode umum)",
+    "relevance_status": "unjudged",
+    "mapping_status": "no_sources"
+  }
+]

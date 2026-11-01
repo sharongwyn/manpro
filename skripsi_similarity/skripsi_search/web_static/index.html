@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cari skripsi relevan dari proposal Anda menggunakan Hybrid SBERT dan BM25.">
+  <title>Temu Skripsi — Pencarian kemiripan penelitian</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Temu Skripsi, halaman utama"><span class="brand-icon" aria-hidden="true">t<span>.</span></span>temu<span class="brand-light">skripsi</span></a>
+    <nav aria-label="Navigasi utama"><a class="nav-active" href="#workspace">Pencarian</a><a href="#guide">Cara kerja <span aria-hidden="true">↗</span></a></nav>
+    <div id="connection" class="connection" role="status"><span class="status-dot"></span><span id="connection-text">Menyiapkan database</span></div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow">RUANG KERJA PENELITIAN</p><h1 id="page-title">Temukan penelitian<br>yang relevan dengan ide Anda<span>.</span></h1><p class="intro-text">Telusuri kesamaan topik, metode, dan objek penelitian.<br class="desktop-break"> Bandingkan hasilnya, lalu tinjau bukti dari sumber aslinya.</p></div>
+      <div class="corpus-summary"><div class="corpus-icon" aria-hidden="true">▤</div><div><strong id="document-count">—</strong><span>skripsi dalam database</span><small>DSA · INFOR · SIB</small></div></div>
+    </section>
+    <div id="startup-note" class="startup-note" role="status">Menyiapkan model dan indeks. Pencarian akan tersedia setelah database siap.</div>
+    <section class="workspace" id="workspace" aria-label="Input dan hasil pencarian">
+      <form class="proposal-panel" id="search-form">
+        <div class="panel-heading"><div><span class="step">01 / INPUT</span><h2>Proposal Anda</h2></div><button type="button" class="text-button" id="example-button">Isi contoh <span aria-hidden="true">↙</span></button></div>
+        <label for="title">Judul proposal <span class="required">*</span></label>
+        <input id="title" name="title" type="text" maxlength="6000" placeholder="Contoh: Pengenalan aksara Sunda dengan CNN" required>
+        <div class="label-row"><label for="description">Deskripsi atau abstrak <span class="required">*</span></label><span id="description-count">0 karakter</span></div>
+        <textarea id="description" name="description" rows="5" maxlength="20000" placeholder="Ceritakan masalah yang ingin diselesaikan, pendekatan, serta data yang akan digunakan…" required></textarea>
+        <details class="optional-fields"><summary>Lengkapi aspek penelitian <span>Opsional</span></summary><div class="optional-content"><label for="problem">Masalah atau tujuan</label><textarea id="problem" name="problem" rows="2" maxlength="6000" placeholder="Masalah utama atau tujuan penelitian"></textarea><label for="method">Metode / algoritma</label><input id="method" name="method" maxlength="6000" placeholder="Contoh: EfficientNetV2B0 dan YOLOv8"><label for="dataset">Dataset / sumber data</label><input id="dataset" name="dataset" maxlength="6000" placeholder="Nama dataset, sumber, atau populasi"></div></details>
+        <fieldset class="model-picker"><legend>Konfigurasi pencarian</legend><p class="field-hint">Tiga konfigurasi hybrid teratas dari evaluasi awal.</p><div class="model-options">
+          <label class="model-option"><input type="radio" name="configuration" value="legacy" checked><span class="model-copy"><strong>Legacy <span class="mini-badge">Acuan</span></strong><small>Baseline hybrid · bobot 0,7 / 0,3</small></span><span class="radio-indicator" aria-hidden="true"></span></label>
+          <label class="model-option"><input type="radio" name="configuration" value="plain_w07"><span class="model-copy"><strong>Weighted 0,7</strong><small>Normalisasi peringkat · bobot 0,7 / 0,3</small></span><span class="radio-indicator" aria-hidden="true"></span></label>
+          <label class="model-option"><input type="radio" name="configuration" value="plain_rrf"><span class="model-copy"><strong>RRF</strong><small>Fusion peringkat · konstanta 60</small></span><span class="radio-indicator" aria-hidden="true"></span></label>
+        </div><p class="model-note">Model SBERT sama pada ketiganya. Yang berubah adalah cara skor digabungkan. Hasil evaluasi masih provisional.</p></fieldset>
+        <div class="search-controls"><div><label for="top-k">Jumlah hasil</label><select id="top-k" name="top_k"><option value="5">5 kandidat</option><option value="10" selected>10 kandidat</option><option value="20">20 kandidat</option></select></div><button class="primary-button" type="submit" id="search-button" disabled><span id="search-icon" aria-hidden="true">⌕</span><span id="search-button-text">Cari kemiripan</span></button></div>
+        <p class="error-message" id="form-error" role="alert" hidden></p>
+      </form>
+      <section class="results-panel" aria-labelledby="results-title" aria-busy="false" id="results-panel">
+        <div class="panel-heading"><div><span class="step">02 / OUTPUT</span><h2 id="results-title">Hasil pencarian <span id="result-count" class="count-badge" hidden></span></h2></div><span class="live-tag">HYBRID SEARCH</span></div>
+        <div class="results-toolbar" id="results-toolbar" hidden><p id="result-meta"></p><div><button type="button" class="export-button" id="export-json">↓ JSON</button><button type="button" class="export-button" id="export-csv">↓ CSV</button></div></div>
+        <p id="query-caption" class="query-caption" hidden></p>
+        <div class="empty-state" id="empty-state"><div class="search-illustration" aria-hidden="true"><span>⌕</span><i></i><i></i><i></i></div><h3>Mulai dari ide penelitian Anda</h3><p>Isi judul dan deskripsi, pilih konfigurasi,<br>lalu temukan kandidat beserta bukti kesamaannya.</p><button type="button" class="example-link" id="empty-example-button">Coba dengan proposal contoh <span aria-hidden="true">→</span></button></div>
+        <div id="search-progress" class="search-progress" role="status" hidden><span class="spinner" aria-hidden="true"></span><h3>Mencari penelitian yang relevan…</h3><p>SBERT membaca makna. BM25 mencocokkan istilah.</p></div>
+        <div id="results-list" class="results-list" aria-live="polite"></div>
+        <div class="interpretation"><span aria-hidden="true">i</span><p><strong>Pahami hasilnya.</strong> Skor adalah skor ranking, bukan persentase plagiarisme atau bukti orisinalitas. Skala skor antar konfigurasi berbeda; bandingkan peringkat dan buktinya. Aspek yang belum ditemukan berstatus <em>unknown</em>. Reranking aspek nonaktif.</p></div>
+      </section>
+    </section>
+    <section class="guide" id="guide"><p class="eyebrow">DI BALIK PENCARIAN</p><h2>Dari proposal ke bukti penelitian.</h2><div class="guide-grid"><article><span>01</span><h3>Masukkan konteks</h3><p>Judul dan deskripsi membantu sistem memahami ide. Metode serta dataset dapat memperjelas pencarian.</p></article><article><span>02</span><h3>Dua cara mencari</h3><p>SBERT membandingkan makna, BM25 mencocokkan istilah. Konfigurasi pilihan Anda menggabungkan keduanya.</p></article><article><span>03</span><h3>Tinjau buktinya</h3><p>Buka detail kandidat untuk melihat aspek, potongan teks, sumber data, dan rincian skor yang dapat ditelusuri.</p></article></div></section>
+  </main>
+  <footer><span>temu skripsi <span aria-hidden="true">/</span> Penelusuran awal, keputusan melalui tinjauan.</span><span id="runtime-label">SBERT + BM25 · Aplikasi lokal</span></footer>
+</body>
+</html>

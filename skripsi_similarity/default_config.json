@@ -1,0 +1,12 @@
+{
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "device": null,
+  "configuration": "plain_rrf",
+  "rerank_strength": 0,
+  "seed": 20261020,
+  "selection_status": "Provisional simplicity default; no independent human validation available",
+  "rrf_k": 60,
+  "weighted_normalization": "Per-query midrank ECDF of each channel; scores <= 0 map to 0; no learned statistics",
+  "chunk_overlap_tokens": 16
+}

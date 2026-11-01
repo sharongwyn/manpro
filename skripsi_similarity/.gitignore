@@ -1,0 +1,11 @@
+.model_cache/
+.embedding_cache/
+reports/
+
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+*.log
+.env

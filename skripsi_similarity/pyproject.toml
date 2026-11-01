@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skripsi-similarity"
+version = "1.0.0"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3", "openpyxl>=3.1,<4", "sentence-transformers>=3,<7"]
+
+[project.scripts]
+skripsi-search = "skripsi_search.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["skripsi_search*"]
+
+[tool.setuptools.package-data]
+skripsi_search = ["web_static/*.html", "web_static/*.css", "web_static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

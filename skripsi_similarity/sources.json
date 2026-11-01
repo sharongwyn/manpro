@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {"path": "data/DSA.xlsx", "sheet": "Skripsi", "department": "DSA"},
+    {"path": "data/INFOR.xlsx", "sheet": "Skripsi_Info", "department": "INFOR"},
+    {"path": "data/SIB.xlsx", "sheet": "Skripsi_Batch2", "department": "SIB"}
+  ],
+  "dictionaries": ["kamus/kamus_method.csv", "kamus/kamus_problem.csv", "kamus/kamus_dataset.csv"]
+}

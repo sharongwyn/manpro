@@ -1,0 +1,5 @@
+﻿candidate,dimension,evidence,id,query,reason,relevance,review_status,reviewer
+Klasifikasi sentimen ulasan film menggunakan CNN pada IMDb.,"method same; object, objective and dataset different","Synthetic contrast for annotation training, never a performance label.",HN-method,Klasifikasi penyakit daun tomat menggunakan CNN pada PlantVillage.,,,provisional_synthetic,
+Pengelompokan donor darah berdasarkan profil dengan K-Means.,domain same; objective and method different,"Synthetic contrast for annotation training, never a performance label.",HN-object,Prediksi kebutuhan darah PMI menggunakan ARIMA.,,,provisional_synthetic,
+Klasifikasi daun PlantVillage dari Kaggle.,platform/type same; named dataset and object different,"Synthetic contrast for annotation training, never a performance label.",HN-platform,Deteksi pneumonia pada citra ChestX-ray14 dari Kaggle.,,,provisional_synthetic,
+Deteksi kendaraan menggunakan YOLO11.,family and object same; method version different,"Synthetic contrast for annotation training, never a performance label.",HN-version,Deteksi kendaraan menggunakan YOLOv8.,,,provisional_synthetic,
