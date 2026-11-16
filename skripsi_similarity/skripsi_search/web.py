@@ -112,7 +112,7 @@ def handler_for(app):
                 self.send(200, app.status()); return
             if path == '/api/example':
                 self.send(200, json.loads((app.root / 'evaluation/example_query.json').read_text(encoding='utf-8'))); return
-            assets = {'/': ('index.html', 'text/html; charset=utf-8'), '/index.html': ('index.html', 'text/html; charset=utf-8'), '/styles.css': ('styles.css', 'text/css; charset=utf-8'), '/app.js': ('app.js', 'text/javascript; charset=utf-8')}
+            assets = {'/': ('index.html', 'text/html; charset=utf-8'), '/index.html': ('index.html', 'text/html; charset=utf-8'), '/styles.css': ('styles.css', 'text/css; charset=utf-8'), '/ui-adjustments.css': ('ui-adjustments.css', 'text/css; charset=utf-8'), '/app.js': ('app.js', 'text/javascript; charset=utf-8')}
             if path not in assets:
                 self.send(404, {'error': 'Halaman tidak ditemukan.'}); return
             name, mime = assets[path]

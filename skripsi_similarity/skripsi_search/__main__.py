@@ -4,6 +4,7 @@ from pathlib import Path
 from .engine import load_index,CONFIGS
 from .evaluate import run_evaluation,write_csv
 from .ingest import read_sources,write_json
+from .concentrations import run_classification
 
 def main():
     p=argparse.ArgumentParser(description='Exact SBERT + BM25 skripsi search')
@@ -13,10 +14,23 @@ def main():
     ix=sub.add_parser('index'); ix.add_argument('--rebuild',action='store_true')
     search=sub.add_parser('search'); search.add_argument('--title',default=''); search.add_argument('--description',default=''); search.add_argument('--problem',default=''); search.add_argument('--method',default=''); search.add_argument('--dataset',default=''); search.add_argument('--query-json'); search.add_argument('--top-k',type=int,default=5); search.add_argument('--config',choices=CONFIGS); search.add_argument('--rerank',type=float,choices=[0,.05,.1]); search.add_argument('--output',default='reports/search.json')
     ev=sub.add_parser('evaluate'); ev.add_argument('--queries'); ev.add_argument('--annotations')
+    concentrations=sub.add_parser('classify-concentrations',help='Create a provisional, title-only INFOR concentration review')
+    concentrations.add_argument('--annotations',help='CSV with id and category (or human_category) columns for manual labels')
+    concentrations.add_argument('--output',default='reports/concentration_review.csv')
     args=p.parse_args(); root=Path(args.root)
     if args.command=='ingest':
         c=json.loads((root/'sources.json').read_text(encoding='utf-8')); docs,report=read_sources(c,root); write_json(root/'reports/corpus.json',docs); write_json(root/'reports/data_quality.json',report)
         print(json.dumps({k:report[k] for k in ('initial_rows','documents','excluded_count','duplicates_merged','conflict_groups')},indent=2)); return
+    if args.command=='classify-concentrations':
+        report,json_output=run_classification(root,args.annotations,args.output)
+        print(json.dumps({
+            'documents':report['document_count'],
+            'predictions':report['prediction_counts'],
+            'csv':report['csv_output'],
+            'report':str(json_output),
+            'validation':report['validation'],
+        },ensure_ascii=False,indent=2))
+        return
     index=load_index(root,rebuild=getattr(args,'rebuild',False))
     if args.command=='index': print(json.dumps({'documents':len(index.docs),'fingerprint':index.fingerprint,'truncation':index.truncation},indent=2)); return
     if args.command=='evaluate':

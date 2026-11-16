@@ -6,6 +6,8 @@ const aspectNames = { problem: 'Masalah / tujuan', algorithm: 'Algoritma', techn
 let ready = false;
 let busy = false;
 let currentResult = null;
+let currentPage = 1;
+const pageSize = 3;
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -71,11 +73,10 @@ function scoreRow(table, label, value, digits = 3) {
 }
 function renderCard(row) {
   const card = element('article', 'result-card');
+  if (Number(row.final_rank) === 1) card.classList.add('top-result');
   const head = element('div', 'result-card-head');
   const heading = element('div');
-  const deptText = row.department + (row.konsentrasi && row.konsentrasi !== '-' ? ' (' + row.konsentrasi + ')' : '');
-  const metaText = [deptText, row.year].filter(Boolean).join(' · ');
-  heading.append(element('h3', 'result-title', row.title), element('div', 'result-meta', metaText));
+  heading.append(element('h3', 'result-title', row.title), element('div', 'result-meta', [row.department, row.year].filter(Boolean).join(' · ')));
   head.append(element('span', 'rank-number', row.final_rank), heading);
   const scores = element('div', 'result-score');
   scores.append(element('span', 'fusion-score', number(row.hybrid_score, row.config === 'plain_rrf' ? 4 : 3)), element('span', 'score-label', 'Skor ranking'), element('span', 'raw-score', 'SBERT ' + number(row.sbert_raw) + ' · BM25 ' + number(row.bm25_raw, 2)));
@@ -145,7 +146,8 @@ function renderCard(row) {
 }
 function render(result) {
   currentResult = result;
-  $('results-list').replaceChildren(...result.results.map(renderCard));
+  currentPage = 1;
+  renderPage();
   $('result-count').hidden = false;
   $('result-count').textContent = result.results.length;
   $('results-toolbar').hidden = false;
@@ -158,6 +160,28 @@ function render(result) {
     empty.append(element('h3', '', 'Belum ada kandidat dengan sinyal positif'), element('p', '', 'Tambahkan konteks atau istilah penelitian yang lebih informatif, lalu coba lagi.'));
     $('results-list').append(empty);
   }
+}
+function renderPage() {
+  if (!currentResult) return;
+  const total = currentResult.results.length;
+  const pages = Math.max(1, Math.ceil(total / pageSize));
+  currentPage = Math.min(Math.max(currentPage, 1), pages);
+  const start = (currentPage - 1) * pageSize;
+  $('results-list').replaceChildren(...currentResult.results.slice(start, start + pageSize).map(renderCard));
+  $('pagination').hidden = total <= pageSize;
+  $('page-status').textContent = `Halaman ${currentPage} dari ${pages}`;
+  $('previous-page').disabled = currentPage === 1;
+  $('next-page').disabled = currentPage === pages;
+}
+function showSettings(show) {
+  $('settings-page').hidden = !show;
+  $('open-settings').hidden = show;
+  document.querySelector('label[for="title"]').hidden = show;
+  $('title').hidden = show;
+  $('description').hidden = show;
+  $('description').previousElementSibling.hidden = show;
+  $('search-form').classList.toggle('showing-settings', show);
+  if (show) $('settings-page').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 async function search(event) {
   event.preventDefault();
@@ -212,4 +236,8 @@ $('example-button').addEventListener('click', fillExample);
 $('empty-example-button').addEventListener('click', fillExample);
 $('export-json').addEventListener('click', () => download('json'));
 $('export-csv').addEventListener('click', () => download('csv'));
+$('open-settings').addEventListener('click', () => showSettings(true));
+$('back-to-proposal').addEventListener('click', () => showSettings(false));
+$('previous-page').addEventListener('click', () => { currentPage--; renderPage(); });
+$('next-page').addEventListener('click', () => { currentPage++; renderPage(); });
 status();

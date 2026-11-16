@@ -10,6 +10,7 @@ from skripsi_search.ingest import read_sources
 from skripsi_search.aspects import Extractor,compare
 from skripsi_search.engine import BM25,Index,order,percentile,fingerprint
 from skripsi_search.evaluate import metrics,grouped_components
+from skripsi_search.concentrations import classify_title, concentration_docs, run_classification, validation_metrics
 
 class Tokenizer:
     model_max_length=32
@@ -144,6 +145,46 @@ def test_components_no_leakage():
 
 def test_zero_bm25():
     assert BM25([[],[]]).scores(['x']).tolist()==[0,0]
+
+def test_concentration_title_rules():
+    assert classify_title('Pengembangan game edukasi matematika')['predicted_category']=='Game'
+    assert classify_title('Klasifikasi gambar dengan machine learning')['predicted_category']=='AI'
+    assert classify_title('Analisis keamanan jaringan menggunakan firewall')['predicted_category']=='Cyber'
+    fallback=classify_title('Sistem informasi akademik berbasis web')
+    assert fallback['predicted_category']=='Full Stack' and fallback['needs_review']
+    multiple=classify_title('Game dengan chatbot berbasis artificial intelligence')
+    assert multiple['predicted_category']=='Perlu validasi'
+    assert multiple['matched_categories']==['Game','AI']
+    assert classify_title('Gameplay untuk evaluasi')['predicted_category']=='Full Stack'
+
+def test_concentration_validation_metrics():
+    rows=[
+        {'id':'a','predicted_category':'Game'},
+        {'id':'b','predicted_category':'Cyber'},
+        {'id':'c','predicted_category':'Perlu validasi'},
+    ]
+    result=validation_metrics(rows,{'a':'Game','b':'AI','c':'Game'})
+    assert result['scored_count']==2
+    assert result['withheld_for_multiple_category_matches']==1
+    assert result['accuracy_on_scored']==0.5
+    assert result['confusion_matrix']['AI']['Cyber']==1
+
+def test_concentration_command_exports_review_and_validation(tmp_path):
+    reports=tmp_path/'reports'; reports.mkdir()
+    docs=[
+        {'id':'game-1','title':'Game belajar matematika','provenance':[{'department':'INFOR'}]},
+        {'id':'web-1','title':'Sistem akademik berbasis web','provenance':[{'department':'INFOR'}]},
+        {'id':'other-1','title':'Game edukasi','provenance':[{'department':'SIB'}]},
+    ]
+    (reports/'corpus.json').write_text(json.dumps(docs),encoding='utf-8')
+    (tmp_path/'labels.csv').write_text('id,category\ngame-1,Game\nweb-1,Full Stack\n',encoding='utf-8')
+    report,json_output=run_classification(tmp_path,'labels.csv')
+    assert report['document_count']==2
+    assert report['validation']['scored_count']==2
+    assert json_output.is_file()
+    with (reports/'concentration_review.csv').open(encoding='utf-8-sig',newline='') as stream:
+        exported=list(__import__('csv').DictReader(stream))
+    assert exported[0]['human_category']=='Game'
 
 def test_index_search_evaluation(tmp_path,dictionary):
     from skripsi_search.evaluate import run_evaluation

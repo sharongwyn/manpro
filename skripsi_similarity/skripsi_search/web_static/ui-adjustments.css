@@ -1,0 +1,29 @@
+.settings-link,.back-button{border:0;background:none;color:var(--teal);font-size:12px;font-weight:600;padding:8px 0;cursor:pointer}
+.settings-link,.back-button{display:inline-flex;align-items:center;gap:6px;line-height:1.5}
+.settings-link:hover,.back-button:hover{color:#104f4a;text-decoration:underline;text-underline-offset:3px}
+.settings-link span{margin-left:6px}
+.settings-page{border-top:1px solid var(--line);padding-top:16px;margin:8px 0 18px}
+.settings-page-heading{margin-bottom:18px}
+.settings-page-heading .step{margin-top:12px}
+.settings-page-heading .step{margin:0 0 5px}
+.settings-page-heading .back-button{margin-bottom:8px}
+.settings-page-heading h2{margin:2px 0 5px}
+.settings-page-heading p{font-size:11px;color:var(--muted);margin:0}
+.back-button{padding:3px 0}
+.settings-page .optional-fields{margin-bottom:16px}
+.settings-controls{margin-top:14px}
+.settings-controls>div{width:100%}
+.settings-controls select{max-width:180px}
+.pagination{display:flex;justify-content:center;align-items:center;gap:20px;margin:0 0 20px;padding:12px 0;border-top:1px solid var(--line)}
+.pagination button{min-height:32px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--muted);padding:6px 10px;font-size:10px;line-height:1.4;transition:background .15s,border-color .15s,color .15s}
+.pagination button:not(:disabled):hover{background:var(--paper);border-color:#b9c9c8;color:var(--ink)}
+.pagination button:focus-visible{outline:3px solid #54a99d;outline-offset:2px}
+.pagination button:disabled{opacity:.45;cursor:not-allowed}
+.pagination span{font-size:10px;color:var(--muted);white-space:nowrap}
+.result-card:first-child:not(.top-result){border-color:var(--line);background:#fff}
+.result-card:first-child:not(.top-result) .rank-number{color:var(--teal);background:#edf2ef}
+.result-card.top-result{border-color:#a7c5b8;background:#fcfefd}
+.result-card.top-result .rank-number{color:#fff;background:var(--teal)}
+.results-list{margin-bottom:15px}
+@media(max-width:420px){.pagination{gap:12px}.pagination button{padding:6px 7px}}
+@media(max-width:760px){.settings-page{margin-top:12px}}

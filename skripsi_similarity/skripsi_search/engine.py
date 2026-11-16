@@ -6,7 +6,6 @@ import numpy as np
 from .text import clean, tokens, digest, TEXT_VERSION, chunk_text
 from .aspects import Extractor, compare
 from .ingest import read_sources, write_json
-from .classifier import klasifikasi
 
 MODEL='sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'
 INDEX_VERSION='exact-v1'
@@ -81,14 +80,6 @@ class Index:
         self.sections=[]; self.chunks=[]; self.plain=[]; self.legacy=[]
         self.aspects=[]; legacy_lex=[]; lex=[]
         for d in docs:
-            dept = str(d.get('department', '')).upper()
-            if 'INFOR' in dept:
-                konsentrasi, kw_terdeteksi = klasifikasi(d['title'], d['abstract'])
-                d['konsentrasi'] = konsentrasi
-                d['keyword_terdeteksi'] = kw_terdeteksi
-            else:
-                d['konsentrasi'] = '-'
-                d['keyword_terdeteksi'] = ''
             sec={'title_abstract':clean(d['title']+'. '+d['abstract']),**{k:v['text'] for k,v in d['parsed']['sections'].items()}}
             self.sections.append(sec)
             lex.append(tokens(' '.join(sec.values())))
@@ -222,27 +213,8 @@ class Index:
                     qo=self.encoder.tokenizer(qt,add_special_tokens=False,return_offsets_mapping=True)['offset_mapping']
                     qend=qo[min(len(qo),budget)-1][1] if qo else 0
                     evidence.append({'doc_id':d['id'],'section':section,'start':0,'end':end,'text':txt[:end],'truncated':end<len(txt),'query_text':qt[:qend],'query_start':0,'query_end':qend,'query_truncated':qend<len(qt),'cosine':float(s['abstract_cosine'][i] if j==0 else s['scope_cosine'][i])})
-            row={
-                'id':d['id'],
-                'title':d['title'],
-                'department':d['department'],
-                'year':d['year'],
-                'konsentrasi': d.get('konsentrasi', '-'),
-                'keyword_terdeteksi': d.get('keyword_terdeteksi', ''),
-                'sources':d['provenance'],
-                'hybrid_rank':int(hr[i]),
-                'final_rank':rank,
-                'config':config,
-                'hybrid_score':float(s['hybrid'][i]),
-                'final_score':float(final[i]),
-                'aspect_score':a['score'],
-                'rerank_strength':rerank,
-                'rerank_contribution':rerank*a['score'] if i in candidates else 0.,
-                'aspect_comparison':a,
-                'document_aspects':self.aspects[i],
-                'evidence':evidence,
-                'explanation':'Kandidat berdasarkan kemiripan topik SBERT dan istilah BM25. '+ ('Ada aspek yang cocok berdasarkan bukti aturan.' if a['similarities'] else 'Kesamaan aspek belum dikonfirmasi.')+' Tujuan dan kontribusi perlu ditinjau pada dokumen sumber.'
-            }
+            row={'id':d['id'],'title':d['title'],'department':d['department'],'year':d['year'],'sources':d['provenance'],'hybrid_rank':int(hr[i]),'final_rank':rank,'config':config,'hybrid_score':float(s['hybrid'][i]),'final_score':float(final[i]),'aspect_score':a['score'],'rerank_strength':rerank,'rerank_contribution':rerank*a['score'] if i in candidates else 0.,'aspect_comparison':a,'document_aspects':self.aspects[i],'evidence':evidence,'explanation':'Kandidat berdasarkan kemiripan topik SBERT dan istilah BM25. '+ ('Ada aspek yang cocok berdasarkan bukti aturan.' if a['similarities'] else 'Kesamaan aspek belum dikonfirmasi.')+' Tujuan dan kontribusi perlu ditinjau pada dokumen sumber.'}
+            row.update({k:float(s[k][i]) for k in ('sbert_raw','abstract_cosine','scope_cosine','bm25_raw','semantic_transformed','bm25_transformed','semantic_contribution','bm25_contribution')})
             rows.append(row)
         return {'results':rows,'query_aspects':s['query']['aspects'],'fingerprint':self.fingerprint,'config':config,'label_status':'belum dikalibrasi','interpretation':'Skor ranking bukan persentase plagiarisme, probabilitas duplikasi, atau bukti orisinalitas. Kesimpulan terbatas pada corpus ini.','no_positive_signal':not positive_signal}
 

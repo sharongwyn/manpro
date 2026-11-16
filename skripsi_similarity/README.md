@@ -34,6 +34,22 @@ python -m pytest -q
 
 CLI `--root /path/to/project` dipasang sebelum subcommand. Alternatif `pip install -e .` menyediakan perintah `skripsi-search`. `index --rebuild` memaksa encoding ulang. Query dari berkas: `search --query-json evaluation/example_query.json`. Field JSON: `title`, `description`, `problem`, `method`, `dataset`. Query kosong/tanpa istilah informatif ditolak. CPU dipakai bila GPU tidak tersedia; `device` dalam `default_config.json` dapat diisi `cpu` atau `cuda`.
 
+### Evaluasi awal konsentrasi INFOR dari judul
+
+Setelah `reports/corpus.json` tersedia, buat lembar dugaan klasifikasi judul INFOR:
+
+```bash
+python -m skripsi_search classify-concentrations
+```
+
+Perintah ini menghasilkan `reports/concentration_review.csv` dan laporan JSON dengan hitungan kategori. Daftar kata kunci dalam kode adalah hipotesis awal untuk diperiksa bersama dosen, bukan label resmi. Judul yang cocok dengan lebih dari satu kategori ditandai **Perlu validasi**; judul tanpa kata kunci Game/AI/Cyber masuk **Full Stack** sebagai fallback sementara dan juga perlu ditinjau. Baca CSV, lalu isi kolom `human_category` berdasarkan pengecekan dosen dengan salah satu label `Game`, `AI`, `Cyber`, atau `Full Stack`. Untuk membandingkan dugaan dengan label manual:
+
+```bash
+python -m skripsi_search classify-concentrations --annotations reports/concentration_review.csv
+```
+
+Laporan JSON menyertakan confusion matrix, accuracy, precision, recall, F1, dan jumlah judul yang ditahan karena cocok dengan beberapa kategori. Metrik dihitung hanya untuk label manual yang tersedia dan prediksi otomatis yang tidak ambigu; cantumkan cakupan tersebut saat mempresentasikan hasil. Kata kunci AI dan Cyber tetap perlu dikonfirmasi dengan Bu Liliana, termasuk daftar yang diusulkan dari Dewey.
+
 Internet hanya diperlukan saat instalasi dan unduhan pertama model open-source (~480 MB). Revisi model dipin dalam konfigurasi; snapshot lokal dipakai offline setelah tersedia. Tidak ada fallback TF-IDF. Kegagalan model menghasilkan error yang harus diperbaiki, bukan perubahan metode diam-diam.
 
 `requirements.txt` menyediakan rentang lintas platform; `requirements-tested.txt` merekam versi inti yang benar-benar dipakai. `reports/environment.json` mencatat lingkungan lengkap. Pengguna Colab sebaiknya mempertahankan PyTorch bawaan yang sesuai CUDA jika memasang versi CPU lokal tidak diperlukan.
